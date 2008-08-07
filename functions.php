@@ -1,15 +1,6 @@
 <?php
 
 // Widgets FTW!
-
-if ( function_exists('register_sidebar') )
-	register_sidebar(array(
-  	'before_widget' => '',
-		'after_widget' => '',
-		'before_title' => '<h3>',
-		'after_title' => '</h3>',
-	));
-
 function widget_chaoticsoul_links() {
 	wp_list_bookmarks(array(
 		'title_before' => '<h3>', 
@@ -27,16 +18,19 @@ function widget_chaoticsoul_search() {
 <?php
 }
 
-
-if ( function_exists('register_sidebar_widget') ) {
+function chaoticsoul_widget_init() {
+	register_sidebar(array(
+  	'before_widget' => '',
+		'after_widget' => '',
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+	));
 	register_sidebar_widget(__('Links', 'widgets'), 'widget_chaoticsoul_links', null, 'links');
 	register_sidebar_widget(__('Search', 'widgets'), 'widget_chaoticsoul_search', null, 'search');
 }
+add_action('widgets_init', 'chaoticsoul_widget_init');
 
 // Custom Header FTW!
-// Only activate this if your version of WordPress supports custom header images! (2.1+)
-
-
 define('HEADER_TEXTCOLOR', '');
 define('HEADER_IMAGE', '%s/images/headerimage.jpg'); // %s is theme dir uri
 define('HEADER_IMAGE_WIDTH', 760);
@@ -59,6 +53,6 @@ function admin_header_style() {
 
 <?php }
 
-add_custom_image_header('header_style', 'admin_header_style');
+add_custom_image_header('', 'admin_header_style');
 
 ?>
