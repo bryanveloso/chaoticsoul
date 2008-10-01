@@ -11,6 +11,8 @@
                 <?php the_content('<p class="serif">Read the rest of this entry &raquo;</p>'); ?>
                 <?php link_pages('<p><strong>Pages:</strong> ', '</p>', 'number'); ?>
                 <p class="authormeta">~ by <?php the_author() ?> on <? the_date() ?>.</p>
+                <?php if (the_category(', ')) ?><p class="postmetadata">Posted in <?php the_category(', ') ?> | <?php edit_post_link('Edit', '', ' | '); ?></p><?php endif; ?>
+                <?php if (get_the_tags()) ?><p class="postmetadata"><?php the_tags(); ?></p><?php endif; ?>
             </div>
         </div>
         
