@@ -27,6 +27,7 @@
         <li class="<?php echo $oddcomment; ?>" id="comment-<?php comment_ID() ?>">
             <?php comment_text() ?>
             <p class="commentmetadata">
+                <?php echo get_avatar( $id_or_email, $size = '32'); ?>
                 <small>
                 <cite><?php comment_author_link() ?></cite> said this on
                 <?php if ($comment->comment_approved == '0') : ?>
