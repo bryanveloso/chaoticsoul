@@ -1,4 +1,30 @@
 <?php
+function chaoticsoul_comment($comment, $args, $depth) { 
+$GLOBALS['comment'] = $comment;	
+	?>
+	<li <?php comment_class(); ?> id="comment-<?php comment_ID() ?>">
+		<?php comment_text() ?>
+		<p class="commentmetadata">
+			<?php echo get_avatar( $comment, 32 ); ?>
+			<small>
+			<cite><?php comment_author_link() ?></cite> <?php _e('said this on', 'chaoticsoul'); ?>
+			<?php if ($comment->comment_approved == '0') : ?>
+			<em><?php _e('Your comment is awaiting moderation.', 'chaoticsoul'); ?></em>
+			<?php endif; ?>
+			<a href="#comment-<?php comment_ID() ?>" title=""><?php comment_date(get_option('date_format')) ?> <?php _e('at', 'chaoticsoul');?> <?php comment_time(get_option('time_format')) ?></a><?php echo comment_reply_link(array('depth' => $depth, 'max_depth' => $args['max_depth'], 'before' => ' | ')) ?> <?php edit_comment_link(__('edit', 'chaoticsoul'),'(',')'); ?>
+			</small>
+		</p>
+	</li>
+<?php }
+
+$themecolors = array(
+	'bg' => '161410',
+	'text' => '999999',
+	'link' => 'd8d7d3',
+	'border' => '161410'
+	);
+
+$content_width = 497;
 
 // Widgets FTW!
 function widget_chaoticsoul_links() {
@@ -10,10 +36,8 @@ function widget_chaoticsoul_links() {
 
 function widget_chaoticsoul_search() {
 ?>
-	<form method="get" id="searchform" action="/">
-	<div><input type="text" value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" value="Journal Search&#8230;" />
-	<!-- <input type="submit" id="searchsubmit" value="Search" /> -->
-	</div>
+	<form method="get" id="searchform" action="/index.php">
+		<div><input type="text" value="<?php _e('Search', 'chaoticsoul'); ?>" onblur="this.value=(this.value=='') ? '<?php _e('Search', 'chaoticsoul'); ?>' : this.value;" onfocus="this.value=(this.value=='<?php _e('Search', 'chaoticsoul'); ?>') ? '' : this.value;" name="s" id="s" /></div>
 	</form>
 <?php
 }
